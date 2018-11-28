@@ -35,7 +35,7 @@ public class Users {
 
     private String roles;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @MapsId
     private Account account;
 

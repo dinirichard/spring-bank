@@ -1,5 +1,6 @@
 package spring.springbank.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,13 +16,22 @@ import javax.websocket.server.PathParam;
 @RestController
 public class AdminController {
 
+    @Autowired
     UserRepo userRepo;
+
+    @Autowired
     AccountRepo accountRepo;
 
     @RequestMapping(method = RequestMethod.GET, path = "/allByName")
     public Iterable<Users> getByName(@PathParam("name") String name) {
 
         return userRepo.findAllByName(name);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/getAll")
+    public Iterable<Users> getAll() {
+
+        return userRepo.findAll();
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/delete")

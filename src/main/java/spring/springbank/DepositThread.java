@@ -1,18 +1,21 @@
 package spring.springbank;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import spring.springbank.beans.InterestThread;
+
+import javax.annotation.PostConstruct;
+
+@Service
 public class DepositThread extends Thread {
 
-    public void run() {
-        Thread thread = new Thread(() -> {
-            try {
-                while (true) {
-                    Thread.sleep(1000);
+    @Autowired
+    InterestThread interestThread;
 
-                    //UserServices.newMessagesShow(loginEmail);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+    @PostConstruct
+    public void runStuff() {
+
+        new Thread(() -> interestThread.run()).start();
+
     }
 }
